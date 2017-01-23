@@ -37,7 +37,7 @@ lPalavras* buscaPalavras(lPalavras* pp, char* palavra)
 {
 	lPalavras* aux;
 	for(aux = pp; aux != NULL; aux = aux->proxPalavra){
-		if(strcmp(palavra, pp->palavras) == 0){
+		if(strcmp(palavra, aux->palavras) == 0){
 			return aux;
 		}
 	}
@@ -97,19 +97,19 @@ lPalavras* lerArquivo (lPalavras* ppalavra)
 			i++;
 			palavra[i] = fgetc(arquivo);
 		}
-		if(palavra[i] != '\n')
+		if(palavra[i] == '\n')
 			linha++;
 		palavra[i] = '\0';
 		i=0;
-		aux = buscaPalavras(ppalavra, palavra);
+		aux = buscaPalavras(novo, palavra);
 		if(aux == NULL){
-			printf("Entrou no if");
-			novo = inserePalavras(ppalavra, palavra);
+			printf("\tEntrou no if");
+			novo = inserePalavras(novo, palavra);
 		}else {//procura o nodo da linha atual se existir adiciona quantidade
-			printf("Entrou no else");
+			printf("\tEntrou no else");
 			aux->quantidades->quantVezes++;
 		}
-		printf("\n %s \n", ppalavra->palavras);
+		printf("\n %s \n", novo->palavras);
 		palavra[i] = fgetc(arquivo);
 	}
 	fclose(arquivo);

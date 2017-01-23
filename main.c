@@ -12,18 +12,10 @@
 
 int main()
 {
-	//int i;
-
 	lPalavras* ppalavras = (lPalavras*)malloc(sizeof(lPalavras));
 	ppalavras = criaListPalavras(ppalavras);
 
 	ppalavras = lerArquivo(ppalavras);
-
-	//strcpy(ppalavras->palavras, palavra);
-
-	exit(0);
-
-	//if(){}
 
 	return 0;
 }

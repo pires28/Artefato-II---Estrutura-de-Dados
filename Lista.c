@@ -15,6 +15,7 @@ lPalavras* criaListPalavras(lPalavras* ppalavra)
 	lOcorrencia* quanti = ( lOcorrencia*)malloc(sizeof( lOcorrencia));
 	ppalavra->quantidades = quanti;
 	ppalavra->quantidades->numLinhas = 1;
+	ppalavra->quantidades->quantVezes = 0;
 	return NULL;
 }
 lPalavras* inserePalavras(lPalavras* p, char* palavra)
@@ -37,7 +38,7 @@ lPalavras* buscaPalavras(lPalavras* pp, char* palavra)
 {
 	lPalavras* aux;
 	for(aux = pp; aux != NULL; aux = aux->proxPalavra){
-		if(strcmp(palavra, aux->palavras) == 0){
+		if(strcmp(palavra,aux->palavras) == 0){
 			return aux;
 		}
 	}
@@ -79,10 +80,11 @@ void soma_quant( lOcorrencia* pq, lPalavras* pp)
 }
 lPalavras* lerArquivo (lPalavras* ppalavra)
 {
-	int i = 0, linha = 0;
+	int i = 0, linha = 1;
 	char palavra[40];
 	lPalavras* novo = (lPalavras*)malloc(sizeof(lPalavras));
-	lPalavras* aux = ppalavra;
+	lPalavras* aux = malloc(sizeof(lPalavras));
+	aux = ppalavra;
 	FILE *arquivo;
 	arquivo = fopen("texto.txt", "r");
 	if (arquivo == NULL){

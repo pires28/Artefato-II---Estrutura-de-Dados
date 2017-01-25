@@ -31,7 +31,7 @@ lPalavras* buscaPalavras(lPalavras* pp, char* palavra);
 
 //Funções para quantidades
 lOcorrencia* crisQt();
-lOcorrencia* inseriQuantLin(lOcorrencia* pq, lPalavras* pp, int linha);
+lOcorrencia* inseriQuantLin(lOcorrencia* pq, int linha);
 lOcorrencia* buscaOcorrencia(lOcorrencia* quanti, int linha);
 
 //Funções de funcionamento

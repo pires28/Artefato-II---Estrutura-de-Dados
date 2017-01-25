@@ -17,5 +17,7 @@ int main()
 
 	ppalavras = lerArquivo(ppalavras);
 
+	imprime(ppalavras);
+
 	return 0;
 }

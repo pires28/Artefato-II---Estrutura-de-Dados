@@ -17,22 +17,29 @@ lPalavras* criaListPalavras()
 	novo->quantidades = quanti;
 	novo->quantidades->numLinhas = 1;
 	novo->quantidades->quantVezes = 0;
+	novo->proxPalavra = NULL;
+	novo->quantidades->proxQuanti = NULL;
 	return novo;
 }
 lPalavras* inserePalavras(lPalavras* p, char* palavra)
 {
 	lPalavras* novoP = (lPalavras*)malloc(sizeof(lPalavras));
-	novoP->quantidades = malloc(sizeof(lOcorrencia));
+	novoP->quantidades = (lOcorrencia*)malloc(sizeof(lOcorrencia));
+	novoP->quantidades->proxQuanti = NULL;
 	strcpy(novoP->palavras, palavra);
 	novoP->proxPalavra = p;
-	//p=novoP;
 	return novoP;
 }
 void imprime(lPalavras* pp)
 {
 	lPalavras* pri;
+	lOcorrencia* quant;
 	for(pri = pp; pri != NULL; pri = pri->proxPalavra){
 		printf("%s\n", pri->palavras);
+		for(quant = pri->quantidades; quant != NULL; quant = quant->proxQuanti){
+			printf("(%d, %d)",quant->numLinhas, quant->quantVezes);
+		}
+		printf("\n");
 	}
 }
 lPalavras* buscaPalavras(lPalavras* pp, char* palavra)
@@ -40,6 +47,8 @@ lPalavras* buscaPalavras(lPalavras* pp, char* palavra)
 	if(pp != NULL){
 		lPalavras* aux;
 		for(aux = pp; aux != NULL; aux = aux->proxPalavra){
+			if(aux == NULL)
+				return NULL;
 			if(strcmp(palavra,aux->palavras) == 0){
 				return aux;
 			}
@@ -49,23 +58,19 @@ lPalavras* buscaPalavras(lPalavras* pp, char* palavra)
 }
 
 //Funções para Quantidades
- lOcorrencia* ciraQt( lOcorrencia* pq, lPalavras* pp, char* palavra)
-{
-	return NULL;
-}
- lOcorrencia* inseriQuantLin( lOcorrencia* pq, lPalavras* ppalavra, int linha)
+ lOcorrencia* inseriQuantLin( lOcorrencia* pq, int linha)
 {
 	 lOcorrencia* novoQ;
-	 lOcorrencia* auxQ;
-	 lOcorrencia* aux2;
+	 lOcorrencia* aux;
+	 lOcorrencia* ant;
 	novoQ = ( lOcorrencia*)malloc(sizeof( lOcorrencia));
-	novoQ->numLinhas = linha;
-	for(auxQ = pq; auxQ != NULL; auxQ = auxQ->proxQuanti){
-		aux2 = auxQ;
+	for(aux = pq; aux != NULL; aux = aux->proxQuanti){
+		ant = aux;
 	}
+	novoQ->numLinhas = linha;
+	novoQ->quantVezes = 1;
+	ant->proxQuanti = novoQ;
 	novoQ->proxQuanti = NULL;
-	aux2->proxQuanti = novoQ;
-	pq=novoQ;
 	return pq;
 }
 //Funções de funcionamento
@@ -73,8 +78,9 @@ lPalavras* lerArquivo (lPalavras* ppalavra)
 {
 	int i = 0, linha = 1;
 	char palavra[40];
-	lPalavras* novo = (lPalavras*)malloc(sizeof(lPalavras));
+	lPalavras* novo = ppalavra;
 	lPalavras* aux = ppalavra;
+
 	FILE *arquivo;
 	arquivo = fopen("texto.txt", "r");
 	if (arquivo == NULL){
@@ -99,6 +105,9 @@ lPalavras* lerArquivo (lPalavras* ppalavra)
 			novo = inserePalavras(novo, palavra);
 		}else {//procura o nodo da linha atual se existir adiciona quantidade
 			printf("\tEntrou no else");
+			if(linha != aux->quantidades->numLinhas){
+				inseriQuantLin(aux->quantidades, linha);
+			}
 			aux->quantidades->quantVezes++;
 		}
 		printf("\n %s \n", novo->palavras);

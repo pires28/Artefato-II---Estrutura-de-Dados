@@ -21,4 +21,7 @@ int main()
 
 	return 0;
 }
-
+/*
+ * machado (1,1) (3,1)
+ * rodrigues (1,1) (4,1)
+ * gabriel (2,1) (4,1)*/

@@ -24,7 +24,7 @@ typedef struct lOcorrencia {
 
 
 //Funções para palavras
-lPalavras* criaListPalavras(lPalavras* ppalavra);
+lPalavras* criaListPalavras();
 lPalavras* inserePalavras( lPalavras* pp, char* palavra);
 void imprime(lPalavras* pp);
 lPalavras* buscaPalavras(lPalavras* pp, char* palavra);

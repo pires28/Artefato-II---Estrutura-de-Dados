@@ -10,13 +10,14 @@
 #include "Lista.h"
 
 //Funções para as Palavras
-lPalavras* criaListPalavras(lPalavras* ppalavra)
+lPalavras* criaListPalavras()
 {
+	lPalavras* novo = (lPalavras*)malloc(sizeof(lPalavras));
 	lOcorrencia* quanti = ( lOcorrencia*)malloc(sizeof( lOcorrencia));
-	ppalavra->quantidades = quanti;
-	ppalavra->quantidades->numLinhas = 1;
-	ppalavra->quantidades->quantVezes = 0;
-	return NULL;
+	novo->quantidades = quanti;
+	novo->quantidades->numLinhas = 1;
+	novo->quantidades->quantVezes = 0;
+	return novo;
 }
 lPalavras* inserePalavras(lPalavras* p, char* palavra)
 {
@@ -36,10 +37,12 @@ void imprime(lPalavras* pp)
 }
 lPalavras* buscaPalavras(lPalavras* pp, char* palavra)
 {
-	lPalavras* aux;
-	for(aux = pp; aux != NULL; aux = aux->proxPalavra){
-		if(strcmp(palavra,aux->palavras) == 0){
-			return aux;
+	if(pp != NULL){
+		lPalavras* aux;
+		for(aux = pp; aux != NULL; aux = aux->proxPalavra){
+			if(strcmp(palavra,aux->palavras) == 0){
+				return aux;
+			}
 		}
 	}
 	return NULL;
@@ -65,26 +68,13 @@ lPalavras* buscaPalavras(lPalavras* pp, char* palavra)
 	pq=novoQ;
 	return pq;
 }
- lOcorrencia* buscaOcorrencia(lOcorrencia* quanti, int linha)
- {
-
-	 return NULL;
- }
 //Funções de funcionamento
-void soma_quant( lOcorrencia* pq, lPalavras* pp)
-{
-	//Corrigir isso aqui
-	//if(){
-		pq->quantVezes++;
-	//}
-}
 lPalavras* lerArquivo (lPalavras* ppalavra)
 {
 	int i = 0, linha = 1;
 	char palavra[40];
 	lPalavras* novo = (lPalavras*)malloc(sizeof(lPalavras));
-	lPalavras* aux = malloc(sizeof(lPalavras));
-	aux = ppalavra;
+	lPalavras* aux = ppalavra;
 	FILE *arquivo;
 	arquivo = fopen("texto.txt", "r");
 	if (arquivo == NULL){

@@ -12,8 +12,8 @@
 
 int main()
 {
-	lPalavras* ppalavras = (lPalavras*)malloc(sizeof(lPalavras));
-	ppalavras = criaListPalavras(ppalavras);
+	lPalavras* ppalavras ;
+	ppalavras = criaListPalavras();
 
 	ppalavras = lerArquivo(ppalavras);
 

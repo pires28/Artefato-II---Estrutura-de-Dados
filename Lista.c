@@ -47,8 +47,6 @@ lPalavras* buscaPalavras(lPalavras* pp, char* palavra)
 	if(pp != NULL){
 		lPalavras* aux;
 		for(aux = pp; aux != NULL; aux = aux->proxPalavra){
-			if(aux == NULL)
-				return NULL;
 			if(strcmp(palavra,aux->palavras) == 0){
 				return aux;
 			}

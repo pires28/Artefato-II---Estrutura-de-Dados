@@ -13,18 +13,16 @@
 lPalavras* criaListPalavras()
 {
 	lPalavras* novo = (lPalavras*)malloc(sizeof(lPalavras));
-	lOcorrencia* quanti = ( lOcorrencia*)malloc(sizeof( lOcorrencia));
-	novo->quantidades = quanti;
-	novo->quantidades->numLinhas = 1;
-	novo->quantidades->quantVezes = 0;
+	novo->quantidades = NULL;
 	novo->proxPalavra = NULL;
-	novo->quantidades->proxQuanti = NULL;
 	return novo;
 }
-lPalavras* inserePalavras(lPalavras* p, char* palavra)
+lPalavras* inserePalavras(lPalavras* p, char* palavra, int linha)
 {
 	lPalavras* novoP = (lPalavras*)malloc(sizeof(lPalavras));
 	novoP->quantidades = (lOcorrencia*)malloc(sizeof(lOcorrencia));
+	novoP->quantidades->quantVezes = 1;
+	novoP->quantidades->numLinhas = linha;
 	novoP->quantidades->proxQuanti = NULL;
 	strcpy(novoP->palavras, palavra);
 	novoP->proxPalavra = p;
@@ -89,7 +87,6 @@ lPalavras* lerArquivo (lPalavras* ppalavra)
 		while(palavra[i] != ' ' && palavra[i] != '\n'){
 			if(palavra[i] == EOF)
 				break;
-			printf("%c", palavra[i]);
 			i++;
 			palavra[i] = fgetc(arquivo);
 		}
@@ -100,8 +97,8 @@ lPalavras* lerArquivo (lPalavras* ppalavra)
 		aux = buscaPalavras(novo, palavra);
 		if(aux == NULL){
 			printf("\tEntrou no if");
-			novo = inserePalavras(novo, palavra);
-		}else {//procura o nodo da linha atual se existir adiciona quantidade
+			novo = inserePalavras(novo, palavra, linha);
+		}else {
 			printf("\tEntrou no else");
 			if(linha != aux->quantidades->numLinhas){
 				inseriQuantLin(aux->quantidades, linha);

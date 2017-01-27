@@ -58,10 +58,9 @@ lPalavras* buscaPalavras(lPalavras* pp, char* palavra)
 //Funções para Quantidades
 lOcorrencia* inseriQuantLin( lOcorrencia* pq, int linha)
 {
-    lOcorrencia* novoQ;
     lOcorrencia* aux;
     lOcorrencia* ant;
-    novoQ = ( lOcorrencia*)malloc(sizeof( lOcorrencia));
+    lOcorrencia* novoQ = ( lOcorrencia*)malloc(sizeof( lOcorrencia));
     for(aux = pq; aux != NULL; aux = aux->proxQuanti)
     {
         ant = aux;
@@ -97,27 +96,32 @@ lPalavras* lerArquivo (lPalavras* ppalavra)
             palavra[i] = fgetc(arquivo);
         }
         if(palavra[i] == '\n'){
-            linha++;
+            linha = linha + 1;
         }
         palavra[i] = '\0';
         i=0;
         aux = buscaPalavras(novo, palavra);
         if(aux == NULL)
         {
-            //printf("Entrou no if AUX\n");
+            //printf("Inseriu uma nova palavra\n");
             novo = inserePalavras(novo, palavra, linha);
         }
         else
         {
-            //printf("Entrou no else");
-            if(aux->quantidades->numLinhas != linha)
+            //printf("Palavra existente\n");
+            //printf("Linha: %d\n" , linha);
+            lOcorrencia *aux2;
+            lOcorrencia *ant2;
+            for (aux2 = aux->quantidades ; aux2 != NULL ; aux2 = aux2->proxQuanti){
+                ant2 = aux2;
+            }
+            if(ant2->numLinhas != linha)
             {
                 inseriQuantLin(aux->quantidades, linha);
             }else{
-                aux->quantidades->quantVezes++;
+                ant2->quantVezes++;
             }
         }
-
         palavra[i] = fgetc(arquivo);
     }
     fclose(arquivo);

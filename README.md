@@ -1,3 +1,3 @@
 # Artefato-II---Estrutura-de-Dados
 
-Da uma olhada ai pow ta quase la 
+Deu certo feladamae kkkkkk

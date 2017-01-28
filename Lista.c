@@ -1,10 +1,9 @@
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "Lista.h"
 
-//FunÃ§Ãµes para as Palavras
+//Funções para as Palavras
 lPalavras* criaListPalavras()
 {
     lPalavras* novo = (lPalavras*)malloc(sizeof(lPalavras));
@@ -55,12 +54,13 @@ lPalavras* buscaPalavras(lPalavras* pp, char* palavra)
     return NULL;
 }
 
-//FunÃ§Ãµes para Quantidades
+//Funções para Quantidades
 lOcorrencia* inseriQuantLin( lOcorrencia* pq, int linha)
 {
+    lOcorrencia* novoQ;
     lOcorrencia* aux;
     lOcorrencia* ant;
-    lOcorrencia* novoQ = ( lOcorrencia*)malloc(sizeof( lOcorrencia));
+    novoQ = ( lOcorrencia*)malloc(sizeof( lOcorrencia));
     for(aux = pq; aux != NULL; aux = aux->proxQuanti)
     {
         ant = aux;
@@ -71,11 +71,12 @@ lOcorrencia* inseriQuantLin( lOcorrencia* pq, int linha)
     novoQ->proxQuanti = NULL;
     return pq;
 }
-//FunÃ§Ãµes de funcionamento
+//Funções de funcionamento
 lPalavras* lerArquivo (lPalavras* ppalavra)
 {
     int i = 0, linha = 1;
     char palavra[40];
+    char palaAux[40];
     lPalavras* novo = ppalavra;
     lPalavras* aux = ppalavra;
 
@@ -95,26 +96,20 @@ lPalavras* lerArquivo (lPalavras* ppalavra)
             i++;
             palavra[i] = fgetc(arquivo);
         }
-        if(palavra[i] == '\n'){
-            linha = linha + 1;
-        }
+        strcpy(palaAux, palavra);
         palavra[i] = '\0';
-        i=0;
         aux = buscaPalavras(novo, palavra);
         if(aux == NULL)
         {
-            //printf("Inseriu uma nova palavra\n");
             novo = inserePalavras(novo, palavra, linha);
         }
         else
         {
-            //printf("Palavra existente\n");
-            //printf("Linha: %d\n" , linha);
-            lOcorrencia *aux2;
-            lOcorrencia *ant2;
-            for (aux2 = aux->quantidades ; aux2 != NULL ; aux2 = aux2->proxQuanti){
-                ant2 = aux2;
-            }
+        	lOcorrencia* ant2;
+        	lOcorrencia* aux2;
+        	for(aux2 = aux->quantidades; aux2 != NULL; aux2 = aux2->proxQuanti){
+        		ant2 = aux2;
+        	}
             if(ant2->numLinhas != linha)
             {
                 inseriQuantLin(aux->quantidades, linha);
@@ -122,6 +117,10 @@ lPalavras* lerArquivo (lPalavras* ppalavra)
                 ant2->quantVezes++;
             }
         }
+        if(palaAux[i] == '\n'){
+            linha++;
+        }
+        i=0;
         palavra[i] = fgetc(arquivo);
     }
     fclose(arquivo);

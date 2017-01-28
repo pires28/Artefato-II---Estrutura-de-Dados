@@ -1,9 +1,3 @@
-/*
- * Lista.h
- *
- *  Created on: 22 de dez de 2016
- *      Author: MACHADO-AXE
- */
 
 #ifndef LISTA_H_
 #define LISTA_H_

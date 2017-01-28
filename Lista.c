@@ -3,7 +3,7 @@
 #include <string.h>
 #include "Lista.h"
 
-//Funções para as Palavras
+//FunÃ§Ãµes para as Palavras
 lPalavras* criaListPalavras()
 {
     lPalavras* novo = (lPalavras*)malloc(sizeof(lPalavras));
@@ -54,7 +54,7 @@ lPalavras* buscaPalavras(lPalavras* pp, char* palavra)
     return NULL;
 }
 
-//Funções para Quantidades
+//FunÃ§Ãµes para Quantidades
 lOcorrencia* inseriQuantLin( lOcorrencia* pq, int linha)
 {
     lOcorrencia* novoQ;
@@ -71,7 +71,7 @@ lOcorrencia* inseriQuantLin( lOcorrencia* pq, int linha)
     novoQ->proxQuanti = NULL;
     return pq;
 }
-//Funções de funcionamento
+//FunÃ§Ãµes de funcionamento
 lPalavras* lerArquivo (lPalavras* ppalavra)
 {
     int i = 0, linha = 1;

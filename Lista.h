@@ -1,4 +1,3 @@
-
 #ifndef LISTA_H_
 #define LISTA_H_
 
@@ -17,17 +16,17 @@ typedef struct lOcorrencia {
 } lOcorrencia;
 
 
-//Funções para palavras
+//FunÃ§Ãµes para palavras
 lPalavras* criaListPalavras();
 lPalavras* inserePalavras( lPalavras* pp, char* palavra, int linha);
 void imprime(lPalavras* pp);
 lPalavras* buscaPalavras(lPalavras* pp, char* palavra);
 
-//Funções para quantidades
+//FunÃ§Ãµes para quantidades
 lOcorrencia* crisQt();
 lOcorrencia* inseriQuantLin(lOcorrencia* pq, int linha);
 lOcorrencia* buscaOcorrencia(lOcorrencia* quanti, int linha);
 
-//Funções de funcionamento
+//FunÃ§Ãµes de funcionamento
 void soma_quant(lOcorrencia* pq, lPalavras* pp);
 lPalavras* lerArquivo (lPalavras* ppalavra);

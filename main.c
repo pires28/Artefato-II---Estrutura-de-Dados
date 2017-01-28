@@ -1,3 +1,9 @@
+/* Desenvolvido por Gabriel Machado e Francisco Pires 
+*  Curso: Ciência da Computação - UFRR
+*
+*
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -14,9 +20,3 @@ int main()
 
 	return 0;
 }
-/*
- * machado (1,1) (2,1) (3,1)
- * rodrigues (1,1) (4,1)
- * amanda (1,1) (3,1)
- * gabriel (2,2) (3,1) (4,1)
- * fuvale (4,1)*/
